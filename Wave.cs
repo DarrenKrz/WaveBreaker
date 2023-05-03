@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Wave : MonoBehaviour
 {
     private Rigidbody2D wave;
-    private int rippleCount = 0;
+    private int P1rippleCount = 0;
+    private int P2rippleCount = 0;
+    public TMP_Text P1RippleText;
+    public TMP_Text P2RippleText;
     void GoBall(){
         float rand = Random.Range(0, 2);
             if(rand < 1){
@@ -22,35 +26,43 @@ public class Wave : MonoBehaviour
     }
 
     void Update() {
-        // test addition
         // Check position to add force
         if (Input.GetKeyDown("space")) {
             if (wave.position.x < 0) {
                 if (wave.position.x > -2) {
-                    rippleCount += 1;
+                    P1rippleCount += 1;
                     wave.AddForce(new Vector2(10, 0));
+                    P1RippleText.text = P1rippleCount.ToString();
                 }
                 else if (wave.position.x > -7) {
-                    rippleCount += 2;
+                    P1rippleCount += 2;
                     wave.AddForce(new Vector2(20, 0));
+                    P1RippleText.text = P1rippleCount.ToString();
                 } 
                 else {
-                    rippleCount += 3;
+                    P1rippleCount += 3;
                     wave.AddForce(new Vector2(40, 0));
+                    P1RippleText.text = P1rippleCount.ToString();
                 }
             } 
             else {
                 if (wave.position.x < 2) {
-                    rippleCount += 1;
+                    P2rippleCount += 1;
                     wave.AddForce(new Vector2(-10, 0));
+                    P2RippleText.text = P2rippleCount.ToString();
+
                 }
                 else if (wave.position.x < 7) {
-                    rippleCount += 2;
+                    P2rippleCount += 2;
                     wave.AddForce(new Vector2(-20, 0));
+                    P2RippleText.text = P2rippleCount.ToString();
+
                 } 
                 else {
-                    rippleCount += 3;
+                    P2rippleCount += 3;
                     wave.AddForce(new Vector2(-40, 0));
+                    P2RippleText.text = P2rippleCount.ToString();
+
                 }
             }
             if (wave.velocity.magnitude < 10) {
@@ -62,6 +74,7 @@ public class Wave : MonoBehaviour
             else {
                 gameObject.GetComponent<SpriteRenderer>().material.color = new Color(1, 0, 192f/255f);
             }
+
         }
     }
 }
