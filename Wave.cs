@@ -22,6 +22,7 @@ public class Wave : MonoBehaviour
     }
 
     void Update() {
+        // test addition
         // Check position to add force
         if (Input.GetKeyDown("space")) {
             if (wave.position.x < 0) {
