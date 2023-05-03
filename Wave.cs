@@ -26,9 +26,20 @@ public class Wave : MonoBehaviour
     }
 
     void Update() {
-        // Check position to add force
-        if (Input.GetKeyDown("space")) {
-            if (wave.position.x < 0) {
+        // Check velocity to determine color
+        if (wave.velocity.magnitude < 10) {
+                gameObject.GetComponent<SpriteRenderer>().material.color = new Color(119f/255f, 149f/255f, 202f/255f);
+            }
+            else if ( wave.velocity.magnitude > 10 && wave.velocity.magnitude < 20) {
+                gameObject.GetComponent<SpriteRenderer>().material.color = new Color(166f/255f, 52f/255f, 23f/255f);
+            }
+            else {
+                gameObject.GetComponent<SpriteRenderer>().material.color = new Color(1, 0, 192f/255f);
+            }
+
+        // Check position to to determine who can hit the ball and add force
+        if (wave.position.x < 0) {
+            if (Input.GetKeyDown("z")) {
                 if (wave.position.x > -2) {
                     P1rippleCount += 1;
                     wave.AddForce(new Vector2(10, 0));
@@ -44,37 +55,26 @@ public class Wave : MonoBehaviour
                     wave.AddForce(new Vector2(40, 0));
                     P1RippleText.text = P1rippleCount.ToString();
                 }
-            } 
-            else {
+            }
+        } 
+        else {
+            if (Input.GetKeyDown("m")) {
                 if (wave.position.x < 2) {
                     P2rippleCount += 1;
                     wave.AddForce(new Vector2(-10, 0));
                     P2RippleText.text = P2rippleCount.ToString();
-
                 }
                 else if (wave.position.x < 7) {
                     P2rippleCount += 2;
                     wave.AddForce(new Vector2(-20, 0));
                     P2RippleText.text = P2rippleCount.ToString();
-
                 } 
                 else {
                     P2rippleCount += 3;
                     wave.AddForce(new Vector2(-40, 0));
                     P2RippleText.text = P2rippleCount.ToString();
-
                 }
             }
-            if (wave.velocity.magnitude < 10) {
-                gameObject.GetComponent<SpriteRenderer>().material.color = new Color(119f/255f, 149f/255f, 202f/255f);
-            }
-            else if ( wave.velocity.magnitude > 10 && wave.velocity.magnitude < 20) {
-                gameObject.GetComponent<SpriteRenderer>().material.color = new Color(166f/255f, 52f/255f, 23f/255f);
-            }
-            else {
-                gameObject.GetComponent<SpriteRenderer>().material.color = new Color(1, 0, 192f/255f);
-            }
-
         }
     }
 }
