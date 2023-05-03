@@ -6,11 +6,11 @@ using TMPro;
 public class Wave : MonoBehaviour
 {
     private Rigidbody2D wave;
-    private int P1rippleCount = 0;
-    private int P2rippleCount = 0;
+    private int P1RippleCount = 0;
+    private int P2RippleCount = 0;
     public TMP_Text P1RippleText;
     public TMP_Text P2RippleText;
-    public bool reflectedWave;
+    private bool reflectedWave;
     void GoBall(){
         float rand = Random.Range(0, 2);
             if(rand < 1){
@@ -42,46 +42,51 @@ public class Wave : MonoBehaviour
         if (wave.position.x < 0) { // left side
             if (Input.GetKeyDown("z")) {
                 if (wave.position.x > -2) {
-                    P1rippleCount += 1;
+                    P1RippleCount += 1;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
-                    P1RippleText.text = P1rippleCount.ToString();
+                    P1RippleText.text = P1RippleCount.ToString();
                 }
                 else if (wave.position.x > -7) {
-                    P1rippleCount += 2;
+                    P1RippleCount += 2;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
-                    P1RippleText.text = P1rippleCount.ToString();
+                    P1RippleText.text = P1RippleCount.ToString();
                 } 
                 else {
-                    P1rippleCount += 3;
+                    P1RippleCount += 3;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
-                    P1RippleText.text = P1rippleCount.ToString();
+                    P1RippleText.text = P1RippleCount.ToString();
                 }
             }
         }
         else {
             if (Input.GetKeyDown("m")) { // right side
                 if (wave.position.x < 2) {
-                    P2rippleCount += 1;
+                    P2RippleCount += 1;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
-                    P2RippleText.text = P2rippleCount.ToString();
+                    P2RippleText.text = P2RippleCount.ToString();
                 }
                 else if (wave.position.x < 7) {
-                    P2rippleCount += 2;
+                    P2RippleCount += 2;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
-                    P2RippleText.text = P2rippleCount.ToString();
+                    P2RippleText.text = P2RippleCount.ToString();
                 } 
                 else {
-                    P2rippleCount += 3;
+                    P2RippleCount += 3;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
-                    P2RippleText.text = P2rippleCount.ToString();
+                    P2RippleText.text = P2RippleCount.ToString();
                 }
             }
+        }
+    }
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "P1Base" | collision.gameObject.tag == "P2Base") {
+            Debug.Log("ResetWave");
         }
     }
 }
