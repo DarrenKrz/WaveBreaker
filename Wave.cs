@@ -10,6 +10,7 @@ public class Wave : MonoBehaviour
     private int P2rippleCount = 0;
     public TMP_Text P1RippleText;
     public TMP_Text P2RippleText;
+    public bool reflectedWave;
     void GoBall(){
         float rand = Random.Range(0, 2);
             if(rand < 1){
@@ -38,40 +39,46 @@ public class Wave : MonoBehaviour
             }
 
         // Check position to to determine who can hit the ball and add force
-        if (wave.position.x < 0) {
+        if (wave.position.x < 0) { // left side
             if (Input.GetKeyDown("z")) {
                 if (wave.position.x > -2) {
                     P1rippleCount += 1;
-                    wave.AddForce(new Vector2(10, 0));
+                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
+                    wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
                     P1RippleText.text = P1rippleCount.ToString();
                 }
                 else if (wave.position.x > -7) {
                     P1rippleCount += 2;
-                    wave.AddForce(new Vector2(20, 0));
+                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
+                    wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
                     P1RippleText.text = P1rippleCount.ToString();
                 } 
                 else {
                     P1rippleCount += 3;
-                    wave.AddForce(new Vector2(40, 0));
+                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
+                    wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
                     P1RippleText.text = P1rippleCount.ToString();
                 }
             }
-        } 
+        }
         else {
-            if (Input.GetKeyDown("m")) {
+            if (Input.GetKeyDown("m")) { // right side
                 if (wave.position.x < 2) {
                     P2rippleCount += 1;
-                    wave.AddForce(new Vector2(-10, 0));
+                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
+                    wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
                     P2RippleText.text = P2rippleCount.ToString();
                 }
                 else if (wave.position.x < 7) {
                     P2rippleCount += 2;
-                    wave.AddForce(new Vector2(-20, 0));
+                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
+                    wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
                     P2RippleText.text = P2rippleCount.ToString();
                 } 
                 else {
                     P2rippleCount += 3;
-                    wave.AddForce(new Vector2(-40, 0));
+                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
+                    wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
                     P2RippleText.text = P2rippleCount.ToString();
                 }
             }
