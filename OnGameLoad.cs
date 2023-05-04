@@ -13,15 +13,19 @@ public class OnGameLoad : MonoBehaviour
     public TMP_Text P2RippleText;
     public TMP_Text onWaveCrash; 
     public TMP_Text countdownDisplay;
-    private float countdown = 2f;
+    private float countdown;
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        onWaveCrash.faceColor = new Color32(105,179,233,0);
+        onWaveCrash.faceColor = new Color32(112,113,255,0);
         StartGame();
     }
     public void StartGame() {
+        countdownDisplay.faceColor = new Color32(105,179,233,255);
+        countdown = 2f;
+        Update();
+        onWaveCrash.faceColor = new Color32(112,113,255,0);
         wave = GetComponent<Rigidbody2D>();
         Time.timeScale = 1f;
         Invoke("GoBall", 2);
@@ -105,8 +109,8 @@ public class OnGameLoad : MonoBehaviour
         if (collision.gameObject.tag == "P1Base" | collision.gameObject.tag == "P2Base") {
             wave.velocity = new Vector2(0,0);
             wave.MovePosition(new Vector2(0,1));
-            Invoke("GoBall", 2);
-            onWaveCrash.faceColor = new Color32(105,179,233,255);
+            Invoke("StartGame", 1);
+            onWaveCrash.faceColor = new Color32(112,113,255,255);
         }
     }
     void OnDisable() {
