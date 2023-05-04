@@ -11,7 +11,6 @@ public class WaveCrash : MonoBehaviour
 
 
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log(collision.gameObject.GetComponent<Renderer>().material.color.ToString());
         if (collision.gameObject.GetComponent<Renderer>().material.color.ToString() == "RGBA(0.467, 0.584, 0.792, 1.000)") {
             health--;
             healthText.text = health.ToString();

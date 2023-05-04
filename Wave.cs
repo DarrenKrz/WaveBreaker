@@ -88,7 +88,6 @@ public class Wave : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "P1Base" | collision.gameObject.tag == "P2Base") {
-            Debug.Log("ResetWave");
             wave.velocity = new Vector2(0,0);
             wave.MovePosition(new Vector2(0,1));
             Invoke("GoBall", 2);
