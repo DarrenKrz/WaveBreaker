@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MoveScenes : MonoBehaviour
 {
 	public void MoveToScene(int sceneID) {
-		Debug.Log("changed scenes");
 		SceneManager.LoadScene(sceneID);
 	}
 }

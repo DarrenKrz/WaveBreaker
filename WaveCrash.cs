@@ -6,9 +6,8 @@ using TMPro;
 
 public class WaveCrash : MonoBehaviour
 {
-    int health = 10;
+    int health = 1;
     public TMP_Text healthText;
-
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.GetComponent<Renderer>().material.color.ToString() == "RGBA(0.467, 0.584, 0.792, 1.000)") {
