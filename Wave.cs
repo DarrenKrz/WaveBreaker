@@ -10,8 +10,10 @@ public class Wave : MonoBehaviour
     private int P2RippleCount = 0;
     public TMP_Text P1RippleText;
     public TMP_Text P2RippleText;
-    private bool reflectedWave;
+    public TMP_Text OnWaveCrash; 
+    
     void GoBall(){
+        OnWaveCrash.faceColor = new Color32(105,179,233,0);
         float rand = Random.Range(0, 2);
             if(rand < 1){
                 wave.AddForce(new Vector2(10, -8));
@@ -87,6 +89,10 @@ public class Wave : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "P1Base" | collision.gameObject.tag == "P2Base") {
             Debug.Log("ResetWave");
+            wave.velocity = new Vector2(0,0);
+            wave.MovePosition(new Vector2(0,1));
+            Invoke("GoBall", 2);
+            OnWaveCrash.faceColor = new Color32(105,179,233,255);
         }
     }
 }
