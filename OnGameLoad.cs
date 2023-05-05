@@ -62,7 +62,7 @@ public class OnGameLoad : MonoBehaviour
 
         // Check position to to determine who can hit the ball and add force
         if (wave.position.x < 0) { // left side
-            if (Input.GetKeyDown("z") & checkPause.paused == false) {
+            if (Input.GetKeyDown("z") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
                 if (wave.position.x > -2) {
                     P1RippleCount += 1;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
@@ -83,8 +83,8 @@ public class OnGameLoad : MonoBehaviour
                 }
             }
         }
-        else {
-            if (Input.GetKeyDown("m") & checkPause.paused == false) { // right side
+        else { // right side
+            if (Input.GetKeyDown("m") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
                 if (wave.position.x < 2) {
                     P2RippleCount += 1;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
