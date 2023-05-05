@@ -14,12 +14,14 @@ public class GameEnd : MonoBehaviour
     public GameObject P2WinsGameEndText;
     public GameObject playAgain;
     public GameObject mainMenu;
-    void Update() {
+    void Start() {
         gameEndScreen.SetActive(gameOverFlag);
         playAgain.SetActive(gameOverFlag);
         mainMenu.SetActive(gameOverFlag);
         P1WinsGameEndText.SetActive(false);
         P2WinsGameEndText.SetActive(false);
+    }
+    void Update() {
         if (Convert.ToInt32(P1Health.text) <= 0) {
             gameOverFlag = true;
             Time.timeScale = 0f;
