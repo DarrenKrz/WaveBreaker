@@ -7,7 +7,7 @@ public class Pause : MonoBehaviour
 {
     public GameObject pauseScreen;
     public TMP_Text pausedText;
-    private bool paused;
+    public bool paused;
     public bool showWaveBreakFlag;
     public GameObject restartGame;
     public GameObject mainMenu;

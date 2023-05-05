@@ -14,6 +14,7 @@ public class OnGameLoad : MonoBehaviour
     public TMP_Text waveBreakText; 
     public TMP_Text countdownDisplay;
     private float countdown;
+    public Pause checkPause;
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -61,7 +62,7 @@ public class OnGameLoad : MonoBehaviour
 
         // Check position to to determine who can hit the ball and add force
         if (wave.position.x < 0) { // left side
-            if (Input.GetKeyDown("z")) {
+            if (Input.GetKeyDown("z") & checkPause.paused == false) {
                 if (wave.position.x > -2) {
                     P1RippleCount += 1;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
@@ -83,7 +84,7 @@ public class OnGameLoad : MonoBehaviour
             }
         }
         else {
-            if (Input.GetKeyDown("m")) { // right side
+            if (Input.GetKeyDown("m") & checkPause.paused == false) { // right side
                 if (wave.position.x < 2) {
                     P2RippleCount += 1;
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
