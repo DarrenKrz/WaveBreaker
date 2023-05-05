@@ -17,6 +17,7 @@ public class OnGameLoad : MonoBehaviour
     public Pause checkPause;
     private bool P1AcquiredRipple = false;
     private bool P2AcquiredRipple = false;
+    public Shop shop;
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -136,11 +137,18 @@ public class OnGameLoad : MonoBehaviour
         if (collision.gameObject.tag == "P1Base" | collision.gameObject.tag == "P2Base") {
             wave.velocity = new Vector2(0,0);
             wave.MovePosition(new Vector2(0,1));
-            Invoke("StartGame", 1);
             waveBreakText.faceColor = new Color32(112,113,255,255);
+            StartCoroutine(WaitForShop());
         }
     }
     void OnDisable() {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    IEnumerator WaitForShop() {
+        yield return new WaitForSeconds(2);
+        waveBreakText.faceColor = new Color32(112,113,255,0);
+        shop.ShowShop();
+        countdown = 2f;
+        Time.timeScale = 0f;
     }
 }
