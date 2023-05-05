@@ -8,7 +8,7 @@ public class GameEnd : MonoBehaviour
 {
     public TMP_Text P1Health;
     public TMP_Text P2Health;
-    private bool gameOverFlag = false;
+    public bool gameOverFlag = false;
     public GameObject gameEndScreen;
     public GameObject P1WinsGameEndText;
     public GameObject P2WinsGameEndText;
@@ -25,12 +25,17 @@ public class GameEnd : MonoBehaviour
         if (Convert.ToInt32(P1Health.text) <= 0) {
             gameOverFlag = true;
             Time.timeScale = 0f;
+            playAgain.SetActive(gameOverFlag);
+            mainMenu.SetActive(gameOverFlag);
+            gameEndScreen.SetActive(gameOverFlag);
             P2WinsGameEndText.SetActive(gameOverFlag);
-
         }
         else if (Convert.ToInt32(P2Health.text) <= 0) {
             gameOverFlag = true;
             Time.timeScale = 0f;
+            playAgain.SetActive(gameOverFlag);
+            mainMenu.SetActive(gameOverFlag);
+            gameEndScreen.SetActive(gameOverFlag);
             P1WinsGameEndText.SetActive(gameOverFlag);
         }
     }

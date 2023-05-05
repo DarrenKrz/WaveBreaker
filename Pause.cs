@@ -14,23 +14,26 @@ public class Pause : MonoBehaviour
     public TMP_Text playAgain;
     public TMP_Text countDown;
     public TMP_Text waveBreakText;
+    public GameEnd checkGameOver;
     void Update() {
-        pauseScreen.SetActive(paused);
-        restartGame.SetActive(paused);
-        mainMenu.SetActive(paused);
-        if (Input.GetKeyDown(KeyCode.Escape) && paused == false) {
-            PauseGame();
+        if (checkGameOver.gameOverFlag == false) {
             pauseScreen.SetActive(paused);
             restartGame.SetActive(paused);
             mainMenu.SetActive(paused);
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && paused == true) {
-            ResumeGame();
-            pauseScreen.SetActive(paused);
-            restartGame.SetActive(paused);
-            mainMenu.SetActive(paused);
-        }
+            if (Input.GetKeyDown(KeyCode.Escape) && paused == false) {
+                PauseGame();
+                pauseScreen.SetActive(paused);
+                restartGame.SetActive(paused);
+                mainMenu.SetActive(paused);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && paused == true) {
+                ResumeGame();
+                pauseScreen.SetActive(paused);
+                restartGame.SetActive(paused);
+                mainMenu.SetActive(paused);
+            }
 
+        }
     }
     void PauseGame() {
         if (waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
