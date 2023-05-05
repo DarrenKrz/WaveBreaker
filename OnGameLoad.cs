@@ -15,6 +15,8 @@ public class OnGameLoad : MonoBehaviour
     public TMP_Text countdownDisplay;
     private float countdown;
     public Pause checkPause;
+    private bool P1AcquiredRipple = false;
+    private bool P2AcquiredRipple = false;
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -64,19 +66,31 @@ public class OnGameLoad : MonoBehaviour
         if (wave.position.x < 0) { // left side
             if (Input.GetKeyDown("z") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
                 if (wave.position.x > -2) {
-                    P1RippleCount += 1;
+                    if (P1AcquiredRipple == false) {
+                        P1RippleCount += 1;
+                        P1AcquiredRipple = true;
+                        P2AcquiredRipple = false;
+                    }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
                     P1RippleText.text = P1RippleCount.ToString();
                 }
                 else if (wave.position.x > -7) {
-                    P1RippleCount += 2;
+                    if (P1AcquiredRipple == false) {
+                        P1RippleCount += 2;
+                        P1AcquiredRipple = true;
+                        P2AcquiredRipple = false;
+                    }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
                     P1RippleText.text = P1RippleCount.ToString();
                 } 
                 else {
-                    P1RippleCount += 3;
+                    if (P1AcquiredRipple == false) {
+                        P1RippleCount += 3;
+                        P1AcquiredRipple = true;
+                        P2AcquiredRipple = false;
+                    }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
                     P1RippleText.text = P1RippleCount.ToString();
@@ -86,19 +100,31 @@ public class OnGameLoad : MonoBehaviour
         else { // right side
             if (Input.GetKeyDown("m") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
                 if (wave.position.x < 2) {
-                    P2RippleCount += 1;
+                     if (P2AcquiredRipple == false) {
+                        P2RippleCount += 1;
+                        P2AcquiredRipple = true;
+                        P1AcquiredRipple = false;
+                    }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
                     P2RippleText.text = P2RippleCount.ToString();
                 }
                 else if (wave.position.x < 7) {
-                    P2RippleCount += 2;
+                    if (P2AcquiredRipple == false) {
+                        P2RippleCount += 2;
+                        P2AcquiredRipple = true;
+                        P1AcquiredRipple = false;
+                    }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
                     P2RippleText.text = P2RippleCount.ToString();
                 } 
                 else {
-                    P2RippleCount += 3;
+                    if (P2AcquiredRipple == false) {
+                        P2RippleCount += 3;
+                        P2AcquiredRipple = true;
+                        P1AcquiredRipple = false;
+                    }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
                     P2RippleText.text = P2RippleCount.ToString();

@@ -1,3 +1,1 @@
-- a player can dribble the wave on their side to get infinite ripples
-	- could change so that you can only hit the wave once or
-	- could change so you only get ripple for your first hit but can still dribble
+- a player stall infinitely in the same zone
