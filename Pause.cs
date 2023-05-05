@@ -11,6 +11,8 @@ public class Pause : MonoBehaviour
     public GameObject restartGame;
     public GameObject mainMenu;
     public TMP_Text playAgain;
+    public TMP_Text countDown;
+    public TMP_Text waveBreakText;
     void Update()
     {
         pauseScreen.SetActive(paused);
@@ -31,11 +33,15 @@ public class Pause : MonoBehaviour
 
     }
     void PauseGame() {
+        countDown.faceColor = new Color32(112,113,255,0);
+        waveBreakText.faceColor = new Color32(112,113,255,0);
         paused = true;
         Time.timeScale = 0f;
         playAgain.text = "Restart Game";
     }
     void ResumeGame() {
+        countDown.faceColor = new Color32(112,113,255,255);
+        waveBreakText.faceColor = new Color32(112,113,255,0);
         paused = false;
         Time.timeScale = 1f;
         playAgain.text = "Play Again";
