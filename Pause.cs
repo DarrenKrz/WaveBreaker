@@ -15,6 +15,7 @@ public class Pause : MonoBehaviour
     public TMP_Text countDown;
     public TMP_Text waveBreakText;
     public GameEnd checkGameOver;
+    public Shop shop;
     void Update() {
         if (checkGameOver.gameOverFlag == false) {
             pauseScreen.SetActive(paused);
@@ -51,12 +52,14 @@ public class Pause : MonoBehaviour
         playAgain.text = "Restart Game";
     }
     void ResumeGame() {
-        countDown.faceColor = new Color32(112,113,255,255);
         if (showWaveBreakFlag) {
             waveBreakText.faceColor = new Color32(112,113,255,255);
         }
         paused = false;
-        Time.timeScale = 1f;
+        if (shop.inShop == false) {
+            countDown.faceColor = new Color32(112,113,255,255);
+            Time.timeScale = 1f;
+        }
         playAgain.text = "Play Again";
     }
 }
