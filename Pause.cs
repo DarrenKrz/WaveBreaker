@@ -7,14 +7,14 @@ public class Pause : MonoBehaviour
 {
     public GameObject pauseScreen;
     public TMP_Text pausedText;
-    private bool paused;
+    public bool paused;
+    public bool showWaveBreakFlag;
     public GameObject restartGame;
     public GameObject mainMenu;
     public TMP_Text playAgain;
     public TMP_Text countDown;
     public TMP_Text waveBreakText;
-    void Update()
-    {
+    void Update() {
         pauseScreen.SetActive(paused);
         restartGame.SetActive(paused);
         mainMenu.SetActive(paused);
@@ -33,15 +33,25 @@ public class Pause : MonoBehaviour
 
     }
     void PauseGame() {
+        if (waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
+            showWaveBreakFlag = false;
+        }
+        else {
+            showWaveBreakFlag = true;
+        }
         countDown.faceColor = new Color32(112,113,255,0);
-        waveBreakText.faceColor = new Color32(112,113,255,0);
+        if (showWaveBreakFlag) {
+            waveBreakText.faceColor = new Color32(112,113,255,0);
+        }
         paused = true;
         Time.timeScale = 0f;
         playAgain.text = "Restart Game";
     }
     void ResumeGame() {
         countDown.faceColor = new Color32(112,113,255,255);
-        waveBreakText.faceColor = new Color32(112,113,255,0);
+        if (showWaveBreakFlag) {
+            waveBreakText.faceColor = new Color32(112,113,255,255);
+        }
         paused = false;
         Time.timeScale = 1f;
         playAgain.text = "Play Again";
