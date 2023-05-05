@@ -34,6 +34,8 @@ public class Shop : MonoBehaviour
         if (P1Ready & P2Ready) {
             start.StartGame();
             inShop = false;
+            P1Ready = false;
+            P2Ready = false;
             shopScreen.SetActive(false);
             P1ReadyButton.SetActive(false);
             P2ReadyButton.SetActive(false);
