@@ -7,21 +7,15 @@ public class Shop : MonoBehaviour
 {
     public GameObject shopScreen;
     public GameObject P1ReadyButton;
-    public GameObject P2ReadyButton;
+    public GameObject P2ReadyButton;    
+    public OnGameLoad start;
+    public GameObject P1ReadyToggle;
+    public GameObject P2ReadyToggle;
     public TMP_Text shopText;
     public bool P1Ready;
     public bool P2Ready;
-    public OnGameLoad start;
     public bool inShop;
-    public GameObject P1ReadyToggle;
-    public GameObject P2ReadyToggle;
-    void Start() {
-        shopScreen.SetActive(false);
-        P1ReadyButton.SetActive(false);
-        P2ReadyButton.SetActive(false);
-        P1ReadyToggle.SetActive(false);
-        P2ReadyToggle.SetActive(false);
-    }
+
     public void ShowShop() {
         inShop = true;
         shopScreen.SetActive(true);
