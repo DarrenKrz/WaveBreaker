@@ -68,8 +68,6 @@ public class OnGameLoad : MonoBehaviour
                 if (wave.position.x > -2) {
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 1;
-                        P1AcquiredRipple = true;
-                        P2AcquiredRipple = false;
                     }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
@@ -78,8 +76,6 @@ public class OnGameLoad : MonoBehaviour
                 else if (wave.position.x > -7) {
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 2;
-                        P1AcquiredRipple = true;
-                        P2AcquiredRipple = false;
                     }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
@@ -88,13 +84,13 @@ public class OnGameLoad : MonoBehaviour
                 else {
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 3;
-                        P1AcquiredRipple = true;
-                        P2AcquiredRipple = false;
                     }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
                     P1RippleText.text = P1RippleCount.ToString();
                 }
+                P1AcquiredRipple = true;
+                P2AcquiredRipple = false;
             }
         }
         else { // right side
@@ -102,8 +98,6 @@ public class OnGameLoad : MonoBehaviour
                 if (wave.position.x < 2) {
                      if (P2AcquiredRipple == false) {
                         P2RippleCount += 1;
-                        P2AcquiredRipple = true;
-                        P1AcquiredRipple = false;
                     }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
@@ -112,8 +106,6 @@ public class OnGameLoad : MonoBehaviour
                 else if (wave.position.x < 7) {
                     if (P2AcquiredRipple == false) {
                         P2RippleCount += 2;
-                        P2AcquiredRipple = true;
-                        P1AcquiredRipple = false;
                     }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
@@ -122,13 +114,13 @@ public class OnGameLoad : MonoBehaviour
                 else {
                     if (P2AcquiredRipple == false) {
                         P2RippleCount += 3;
-                        P2AcquiredRipple = true;
-                        P1AcquiredRipple = false;
                     }
                     wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                     wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
                     P2RippleText.text = P2RippleCount.ToString();
                 }
+                P2AcquiredRipple = true;
+                P1AcquiredRipple = false;
             }
         }
     }
