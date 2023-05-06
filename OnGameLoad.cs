@@ -65,62 +65,54 @@ public class OnGameLoad : MonoBehaviour
         // Check position to to determine who can hit the ball and add force
         if (wave.position.x < 0) { // left side
             if (Input.GetKeyDown("z") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
+                wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x > -2) {
+                    wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 1;
-                    }
-                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
-                    wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
-                    P1RippleText.text = P1RippleCount.ToString();
+                    } 
                 }
                 else if (wave.position.x > -7) {
+                    wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 2;
                     }
-                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
-                    wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
-                    P1RippleText.text = P1RippleCount.ToString();
                 } 
                 else {
+                    wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 3;
-                    }
-                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
-                    wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
-                    P1RippleText.text = P1RippleCount.ToString();
+                    } 
                 }
                 P1AcquiredRipple = true;
                 P2AcquiredRipple = false;
+                P1RippleText.text = P1RippleCount.ToString();
             }
         }
         else { // right side
             if (Input.GetKeyDown("m") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
+                wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x < 2) {
+                    wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
                      if (P2AcquiredRipple == false) {
                         P2RippleCount += 1;
                     }
-                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
-                    wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
-                    P2RippleText.text = P2RippleCount.ToString();
                 }
                 else if (wave.position.x < 7) {
+                    wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
                     if (P2AcquiredRipple == false) {
                         P2RippleCount += 2;
                     }
-                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
-                    wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
-                    P2RippleText.text = P2RippleCount.ToString();
                 } 
                 else {
+                    wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
                     if (P2AcquiredRipple == false) {
                         P2RippleCount += 3;
                     }
-                    wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
-                    wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
-                    P2RippleText.text = P2RippleCount.ToString();
                 }
                 P2AcquiredRipple = true;
                 P1AcquiredRipple = false;
+                P2RippleText.text = P2RippleCount.ToString();
             }
         }
     }
