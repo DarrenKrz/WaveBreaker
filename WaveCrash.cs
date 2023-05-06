@@ -6,31 +6,17 @@ using TMPro;
 
 public class WaveCrash : MonoBehaviour
 {
-    public int health = 10;
-    public TMP_Text healthText;
     public HealthBehaviour healthManager;
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.GetComponent<Renderer>().material.color.ToString() == "RGBA(0.467, 0.584, 0.792, 1.000)") {
-            health--;
-            healthText.text = health.ToString();
-            healthManager.TakeDamage(10);
+            healthManager.TakeDamage(1);
         }
         else if (collision.gameObject.GetComponent<Renderer>().material.color.ToString() == "RGBA(0.651, 0.204, 0.090, 1.000)") {
-            health -= 2;
-            if (health < 0) {
-                health = 0;
-            }
-            healthText.text = health.ToString();
-            healthManager.TakeDamage(20);
+            healthManager.TakeDamage(2);
         }
         else if (collision.gameObject.GetComponent<Renderer>().material.color.ToString() == "RGBA(1.000, 0.000, 0.753, 1.000)") {
-            health -= 3;
-            if (health < 0) {
-                health = 0;
-            }
-            healthText.text = health.ToString();
-            healthManager.TakeDamage(30);
+            healthManager.TakeDamage(3);
         }
     }
 }
