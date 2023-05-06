@@ -14,15 +14,18 @@ public class Shop : MonoBehaviour
     public TMP_Text shopText;
     public bool P1Ready;
     public bool P2Ready;
-    public bool inShop;
+    public bool inShop = false;
 
+    public void Update() {
+        shopScreen.SetActive(inShop);
+        P1ReadyButton.SetActive(inShop);
+        P2ReadyButton.SetActive(inShop);
+        P1ReadyToggle.SetActive(inShop);
+        P2ReadyToggle.SetActive(inShop);
+    }
     public void ShowShop() {
         inShop = true;
-        shopScreen.SetActive(true);
-        P1ReadyButton.SetActive(true);
-        P2ReadyButton.SetActive(true);
-        P1ReadyToggle.SetActive(true);
-        P2ReadyToggle.SetActive(true);
+        Update();
     }
     public void SetP1Ready() {
         P1Ready = true;
@@ -42,11 +45,6 @@ public class Shop : MonoBehaviour
             P2Ready = false;
             P1ReadyToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = false;
             P2ReadyToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = false;
-            shopScreen.SetActive(false);
-            P1ReadyButton.SetActive(false);
-            P2ReadyButton.SetActive(false);
-            P1ReadyToggle.SetActive(false);
-            P2ReadyToggle.SetActive(false);
         }
     }
 }
