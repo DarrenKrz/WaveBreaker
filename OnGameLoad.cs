@@ -11,7 +11,7 @@ public class OnGameLoad : MonoBehaviour
     private int P2RippleCount = 0;
     public TMP_Text P1RippleText;
     public TMP_Text P2RippleText;
-    public TMP_Text waveBreakText; 
+    public GameObject waveBreakText; 
     public TMP_Text countdownDisplay;
     private float countdown;
     public Pause checkPause;
@@ -22,7 +22,6 @@ public class OnGameLoad : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        waveBreakText.faceColor = new Color32(112,113,255,0);
         StartGame();
     }
     public void StartGame() {
@@ -30,11 +29,11 @@ public class OnGameLoad : MonoBehaviour
         countdown = 2f;
         Time.timeScale = 1f;
         Update();
-        waveBreakText.faceColor = new Color32(112,113,255,0);
+        waveBreakText.SetActive(false);
         wave = GetComponent<Rigidbody2D>();
-        Invoke("GoBall", 2);
+        Invoke("WaveStart", 2);
     }
-    void GoBall(){
+    void WaveStart(){
         float rand = Random.Range(0, 2);
             if(rand < 1){
                 wave.AddForce(new Vector2(10, -8));
@@ -65,7 +64,7 @@ public class OnGameLoad : MonoBehaviour
 
         // Check position to to determine who can hit the ball and add force
         if (wave.position.x < 0) { // left side
-            if (Input.GetKeyDown("z") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)" & shop.inShop == false) {
+            if (Input.GetKeyDown("z") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
                 if (wave.position.x > -2) {
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 1;
@@ -99,7 +98,7 @@ public class OnGameLoad : MonoBehaviour
             }
         }
         else { // right side
-            if (Input.GetKeyDown("m") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)" & shop.inShop == false) {
+            if (Input.GetKeyDown("m") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
                 if (wave.position.x < 2) {
                      if (P2AcquiredRipple == false) {
                         P2RippleCount += 1;
@@ -137,7 +136,7 @@ public class OnGameLoad : MonoBehaviour
         if (collision.gameObject.tag == "P1Base" | collision.gameObject.tag == "P2Base") {
             wave.velocity = new Vector2(0,0);
             wave.MovePosition(new Vector2(0,1));
-            waveBreakText.faceColor = new Color32(112,113,255,255);
+            waveBreakText.SetActive(true);
             StartCoroutine(WaitForShop());
         }
     }
@@ -146,7 +145,7 @@ public class OnGameLoad : MonoBehaviour
     }
     IEnumerator WaitForShop() {
         yield return new WaitForSeconds(2);
-        waveBreakText.faceColor = new Color32(112,113,255,0);
+        waveBreakText.SetActive(false);
         shop.ShowShop();
     }
 }
