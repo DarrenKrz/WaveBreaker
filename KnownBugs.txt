@@ -1,1 +1,1 @@
-- a player stall infinitely in the same zone
+- a player can stall infinitely in the same zone

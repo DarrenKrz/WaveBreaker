@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthBehaviour : MonoBehaviour
 {
+    public float health = 10;
     public Image healthBar;
-    public float healthAmount = 100f;
+    public TMP_Text healthText;
 
     public void TakeDamage(float damage) {
-        healthAmount -= damage;
-        healthBar.fillAmount = healthAmount / 100f;
+        if ((health - damage) < 0) {
+            health = 0;
+        }
+        else {
+            health -= damage;
+        }
+        healthText.text = health.ToString();
+        healthBar.fillAmount = health / 10f;
     }
     public void Heal(float healingAmount) {
-        healthAmount += healingAmount;
-        healthAmount = Mathf.Clamp(healthAmount, 0, 100);
-        healthBar.fillAmount = healthAmount / 100f;
+        health += healingAmount;
+        health = Mathf.Clamp(health, 0, 10);
+        healthBar.fillAmount = health / 10f;
     }
 }
