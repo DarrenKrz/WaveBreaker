@@ -12,8 +12,8 @@ public class Pause : MonoBehaviour
     public GameObject restartGame;
     public GameObject mainMenu;
     public TMP_Text playAgain;
-    public TMP_Text countDown;
-    public TMP_Text waveBreakText;
+    public GameObject countDown;
+    public GameObject waveBreakText;
     public GameEnd checkGameOver;
     public Shop shop;
     void Update() {
@@ -33,33 +33,25 @@ public class Pause : MonoBehaviour
                 restartGame.SetActive(paused);
                 mainMenu.SetActive(paused);
             }
-
         }
     }
     void PauseGame() {
-        if (waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
-            showWaveBreakFlag = false;
-        }
-        else {
-            showWaveBreakFlag = true;
-        }
-        countDown.faceColor = new Color32(112,113,255,0);
-        if (showWaveBreakFlag) {
-            waveBreakText.faceColor = new Color32(112,113,255,0);
-        }
         paused = true;
+        if (waveBreakText.activeSelf) { // If paused while wavebreak text on screen, store the fact it was on screen and then hide it
+            showWaveBreakFlag = true;
+            waveBreakText.SetActive(false);
+        }
+        countDown.SetActive(false);
         Time.timeScale = 0f;
         playAgain.text = "Restart Game";
     }
     void ResumeGame() {
-        if (showWaveBreakFlag) {
-            waveBreakText.faceColor = new Color32(112,113,255,255);
-        }
         paused = false;
-        if (shop.inShop == false) {
-            countDown.faceColor = new Color32(112,113,255,255);
-            Time.timeScale = 1f;
+        if (showWaveBreakFlag) { // Put wavebreak text back on screen if needed
+            waveBreakText.SetActive(true);
         }
+        countDown.SetActive(true);
+        Time.timeScale = 1f;
         playAgain.text = "Play Again";
     }
 }

@@ -28,10 +28,10 @@ public class OnGameLoad : MonoBehaviour
     public void StartGame() {
         countdownDisplay.faceColor = new Color32(112,113,255,255);
         countdown = 2f;
+        Time.timeScale = 1f;
         Update();
         waveBreakText.faceColor = new Color32(112,113,255,0);
         wave = GetComponent<Rigidbody2D>();
-        Time.timeScale = 1f;
         Invoke("GoBall", 2);
     }
     void GoBall(){
@@ -65,7 +65,7 @@ public class OnGameLoad : MonoBehaviour
 
         // Check position to to determine who can hit the ball and add force
         if (wave.position.x < 0) { // left side
-            if (Input.GetKeyDown("z") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
+            if (Input.GetKeyDown("z") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)" & shop.inShop == false) {
                 if (wave.position.x > -2) {
                     if (P1AcquiredRipple == false) {
                         P1RippleCount += 1;
@@ -99,7 +99,7 @@ public class OnGameLoad : MonoBehaviour
             }
         }
         else { // right side
-            if (Input.GetKeyDown("m") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)") {
+            if (Input.GetKeyDown("m") & checkPause.paused == false & countdown <= 0 & waveBreakText.faceColor.ToString() == "RGBA(112, 113, 255, 0)" & shop.inShop == false) {
                 if (wave.position.x < 2) {
                      if (P2AcquiredRipple == false) {
                         P2RippleCount += 1;
@@ -148,7 +148,5 @@ public class OnGameLoad : MonoBehaviour
         yield return new WaitForSeconds(2);
         waveBreakText.faceColor = new Color32(112,113,255,0);
         shop.ShowShop();
-        countdown = 2f;
-        Time.timeScale = 0f;
     }
 }
