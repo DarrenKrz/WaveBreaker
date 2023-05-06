@@ -35,12 +35,12 @@ public class OnGameLoad : MonoBehaviour
     }
     void WaveStart(){
         float rand = Random.Range(0, 2);
-            if(rand < 1){
-                wave.AddForce(new Vector2(10, Random.Range(-10, 10)));
-            } 
-            else {
-                wave.AddForce(new Vector2(-10, Random.Range(-10, 10)));
-            }
+        if(rand < 1){
+            wave.AddForce(new Vector2(10, Random.Range(-10, 10)));
+        } 
+        else {
+            wave.AddForce(new Vector2(-10, Random.Range(-10, 10)));
+        }
     }
     void Update() {
         countdown -= Time.deltaTime;
@@ -64,7 +64,7 @@ public class OnGameLoad : MonoBehaviour
 
         // Check position to to determine who can hit the wave and add force
         if (wave.position.x < 0) { // left side
-            if (Input.GetKeyDown("z") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
+            if (Input.GetKeyDown("z") & waveInPlay() == true) {
                 wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x > -2) {
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
@@ -90,7 +90,7 @@ public class OnGameLoad : MonoBehaviour
             }
         }
         else { // right side
-            if (Input.GetKeyDown("m") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
+            if (Input.GetKeyDown("m") & waveInPlay() == true) {
                 wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x < 2) {
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
@@ -131,5 +131,11 @@ public class OnGameLoad : MonoBehaviour
         yield return new WaitForSeconds(2);
         waveBreakText.SetActive(false);
         shop.ShowShop();
+    }
+    public bool waveInPlay() {
+        if ((checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
+            return true;
+        }
+        else return false;
     }
 }
