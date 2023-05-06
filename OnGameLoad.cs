@@ -36,10 +36,10 @@ public class OnGameLoad : MonoBehaviour
     void WaveStart(){
         float rand = Random.Range(0, 2);
             if(rand < 1){
-                wave.AddForce(new Vector2(10, -8));
+                wave.AddForce(new Vector2(10, Random.Range(-10, 10)));
             } 
             else {
-                wave.AddForce(new Vector2(-10, -8));
+                wave.AddForce(new Vector2(-10, Random.Range(-10, 10)));
             }
     }
     void Update() {
@@ -62,7 +62,7 @@ public class OnGameLoad : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().material.color = new Color(1, 0, 192f/255f);
             }
 
-        // Check position to to determine who can hit the ball and add force
+        // Check position to to determine who can hit the wave and add force
         if (wave.position.x < 0) { // left side
             if (Input.GetKeyDown("z") & (checkPause.paused == false) & (countdown <= 0) & (waveBreakText.activeSelf == false) & (shop.inShop == false)) {
                 wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
