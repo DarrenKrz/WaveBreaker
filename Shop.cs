@@ -12,6 +12,7 @@ public class Shop : MonoBehaviour
     public GameObject P1ReadyToggle;
     public GameObject P2ReadyToggle;
     public TMP_Text shopText;
+    public Pause checkPause;
     public bool P1Ready;
     public bool P2Ready;
     public bool inShop = false;
@@ -28,14 +29,18 @@ public class Shop : MonoBehaviour
         Update();
     }
     public void SetP1Ready() {
-        P1Ready = true;
-        P1ReadyToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = true;
-        Ready();
+        if (checkPause.paused == false) {
+            P1Ready = true;
+            P1ReadyToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = true;
+            Ready();
+        }
     }
     public void SetP2Ready() {
-        P2Ready = true;
-        P2ReadyToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = true;
-        Ready();
+        if (checkPause.paused == false) {
+            P2Ready = true;
+            P2ReadyToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = true;
+            Ready();
+        }
     }
     public void Ready() {
         if (P1Ready & P2Ready) {
