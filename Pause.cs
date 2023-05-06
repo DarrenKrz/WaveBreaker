@@ -49,6 +49,7 @@ public class Pause : MonoBehaviour
         paused = false;
         if (showWaveBreakFlag) { // Put wavebreak text back on screen if needed
             waveBreakText.SetActive(true);
+            showWaveBreakFlag = false;
         }
         countDown.SetActive(true);
         Time.timeScale = 1f;
