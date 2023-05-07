@@ -7,10 +7,6 @@ using TMPro;
 public class OnGameLoad : MonoBehaviour
 {
     public Rigidbody2D wave;
-    private int P1RippleCount = 0;
-    private int P2RippleCount = 0;
-    public TMP_Text P1RippleText;
-    public TMP_Text P2RippleText;
     public GameObject waveBreakText; 
     public TMP_Text countdownDisplay;
     private float countdown;
@@ -18,6 +14,9 @@ public class OnGameLoad : MonoBehaviour
     private bool P1AcquiredRipple = false;
     private bool P2AcquiredRipple = false;
     public Shop shop;
+    public PlayerInfo player1;
+    public PlayerInfo player2;
+    
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -69,24 +68,23 @@ public class OnGameLoad : MonoBehaviour
                 if (wave.position.x > -2) {
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
-                        P1RippleCount += 1;
+                        player1.gainRipple(1);
                     } 
                 }
                 else if (wave.position.x > -7) {
                     wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
-                        P1RippleCount += 2;
+                        player1.gainRipple(2);
                     }
                 } 
                 else {
                     wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
-                        P1RippleCount += 3;
+                        player1.gainRipple(3);
                     } 
                 }
                 P1AcquiredRipple = true;
                 P2AcquiredRipple = false;
-                P1RippleText.text = P1RippleCount.ToString();
             }
         }
         else { // right side
@@ -95,24 +93,23 @@ public class OnGameLoad : MonoBehaviour
                 if (wave.position.x < 2) {
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
                      if (P2AcquiredRipple == false) {
-                        P2RippleCount += 1;
+                        player2.gainRipple(1);
                     }
                 }
                 else if (wave.position.x < 7) {
                     wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
                     if (P2AcquiredRipple == false) {
-                        P2RippleCount += 2;
+                        player2.gainRipple(2);
                     }
                 } 
                 else {
                     wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
                     if (P2AcquiredRipple == false) {
-                        P2RippleCount += 3;
+                        player2.gainRipple(3);
                     }
                 }
                 P2AcquiredRipple = true;
                 P1AcquiredRipple = false;
-                P2RippleText.text = P2RippleCount.ToString();
             }
         }
     }
