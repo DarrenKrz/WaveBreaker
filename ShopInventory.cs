@@ -11,10 +11,10 @@ public class ShopInventory : MonoBehaviour
         HealthItem.SetActive(true);
     }
     public void Update() {
-        if (Input.GetKeyDown("z")) {
+        if (Input.GetKeyDown("z") & HealthItem.activeSelf == true) {
             ItemSoldToPlayer(HealthItem, player1);
         }
-        if (Input.GetKeyDown("m")) {
+        if (Input.GetKeyDown("m") & HealthItem.activeSelf == true) {
             ItemSoldToPlayer(HealthItem, player2);
         }
     }
