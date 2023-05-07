@@ -16,6 +16,7 @@ public class Shop : MonoBehaviour
     public bool P1Ready;
     public bool P2Ready;
     public bool inShop = false;
+    public ShopInventory shopInventory;
 
     public void Update() {
         shopScreen.SetActive(inShop);
@@ -26,6 +27,7 @@ public class Shop : MonoBehaviour
     }
     public void ShowShop() {
         inShop = true;
+        shopInventory.FillStore();
         Update();
     }
     public void SetP1Ready() {
