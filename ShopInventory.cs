@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class ShopInventory : MonoBehaviour
 {
+    Dictionary<GameObject, int> itemPrices = new Dictionary<GameObject, int>();
     public GameObject HealthItem;
     public PlayerInfo player1;
     public PlayerInfo player2;    
+
+    void Start() {
+        itemPrices.Add(HealthItem, 5);
+    }
     public void FillStore() {
         HealthItem.SetActive(true);
     }
@@ -19,12 +24,12 @@ public class ShopInventory : MonoBehaviour
         }
     }
     public void ItemSoldToPlayer(GameObject item, PlayerInfo player) {
-        if (player.rippleCount >= item.GetComponent<Item>().price) {
+        if (player.rippleCount >= itemPrices[item]) {
             if (item.tag.ToString() == "HealthItem" & player.currentHealth == 10) {
                 print("Already Full HP");
             }
             else {
-                player.rippleCount -= item.GetComponent<Item>().price;
+                player.rippleCount -= itemPrices[item];
                 player.RippleText.text = player.rippleCount.ToString();
                 item.SetActive(false);
                 player.ItemPurchasedFromStore(item, player);
