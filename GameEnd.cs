@@ -14,10 +14,12 @@ public class GameEnd : MonoBehaviour
     public GameObject P2WinsGameEndText;
     public GameObject playAgain;
     public GameObject mainMenu;
+    public GameObject waveBreakText;
     void Update() {
         if (P1health.currentHealth == 0 | P2health.currentHealth == 0) {
             gameOverFlag = true;
             Time.timeScale = 0f;
+            waveBreakText.SetActive(false);
             playAgain.SetActive(gameOverFlag);
             mainMenu.SetActive(gameOverFlag);
             gameEndScreen.SetActive(gameOverFlag);
