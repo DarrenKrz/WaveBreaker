@@ -11,11 +11,12 @@ public class OnGameLoad : MonoBehaviour
     public TMP_Text countdownDisplay;
     private float countdown;
     public Pause checkPause;
-    private bool P1AcquiredRipple = false;
-    private bool P2AcquiredRipple = false;
+    public bool P1AcquiredRipple = false;
+    public bool P2AcquiredRipple = false;
     public Shop shop;
     public PlayerInfo player1;
     public PlayerInfo player2;
+    public ComputerOpponent computerOpponentCheck;
     
     void OnEnable() {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -24,6 +25,7 @@ public class OnGameLoad : MonoBehaviour
         StartGame();
     }
     public void StartGame() {
+        computerOpponentCheck.vsComputer();
         countdownDisplay.faceColor = new Color32(112,113,255,255);
         countdown = 2f;
         Time.timeScale = 1f;
@@ -69,7 +71,7 @@ public class OnGameLoad : MonoBehaviour
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
                     if (P1AcquiredRipple == false) {
                         player1.gainRipple(1);
-                    } 
+                    }
                 }
                 else if (wave.position.x > -7) {
                     wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
@@ -85,10 +87,13 @@ public class OnGameLoad : MonoBehaviour
                 }
                 P1AcquiredRipple = true;
                 P2AcquiredRipple = false;
+                if (computerOpponentCheck.computerInPlay == true) {
+                    computerOpponentCheck.computerHitWave = false;
+                }
             }
         }
         else { // right side
-            if (Input.GetKeyDown("m") & waveInPlay() == true) {
+            if (Input.GetKeyDown("m") & waveInPlay() == true & computerOpponentCheck.computerInPlay == false) {
                 wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x < 2) {
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
@@ -110,6 +115,9 @@ public class OnGameLoad : MonoBehaviour
                 }
                 P2AcquiredRipple = true;
                 P1AcquiredRipple = false;
+            }
+            else {
+                computerOpponentCheck.onComputerSide();
             }
         }
     }
