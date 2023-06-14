@@ -11,6 +11,10 @@ public class PlayerInfo : MonoBehaviour
     public List<GameObject> Inventory;
     public TMP_Text RippleText;
     public Item itemInfo;
+    public float reflectCooldown;
+    public TMP_Text playerCountdown;
+    public bool coolDownActive;
+
     public void start() {
         currentHealth = maxHealth;
     }
@@ -24,5 +28,19 @@ public class PlayerInfo : MonoBehaviour
     public void gainRipple(int ripple) {
         rippleCount += ripple;
         RippleText.text = rippleCount.ToString();
+    }
+    public void startCooldown(float x) {
+        reflectCooldown = x;
+        coolDownActive = true;
+    }
+    void Update() {
+        if (reflectCooldown > 0) {
+            reflectCooldown -= Time.deltaTime;
+        }
+        else {
+            reflectCooldown = 0;
+            coolDownActive = false;
+        }
+        playerCountdown.text = reflectCooldown.ToString("0.0");
     }
 }

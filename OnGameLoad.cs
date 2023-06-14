@@ -65,22 +65,25 @@ public class OnGameLoad : MonoBehaviour
 
         // Check position to to determine who can hit the wave and add force
         if (wave.position.x < 0) { // left side
-            if (Input.GetKeyDown("z") & waveInPlay() == true) {
+            if (Input.GetKeyDown("z") & waveInPlay() == true & (player1.coolDownActive == false & player1.reflectCooldown <= 0)) {
                 wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x > -2) {
                     wave.velocity = new Vector2(wave.velocity.x + 1, -wave.velocity.y);
+                    player1.startCooldown(2);
                     if (P1AcquiredRipple == false) {
                         player1.gainRipple(1);
                     }
                 }
                 else if (wave.position.x > -7) {
                     wave.velocity = new Vector2(wave.velocity.x + 2, -wave.velocity.y);
+                    player1.startCooldown(1);
                     if (P1AcquiredRipple == false) {
                         player1.gainRipple(2);
                     }
                 } 
                 else {
                     wave.velocity = new Vector2(wave.velocity.x + 4, -wave.velocity.y);
+                    player1.startCooldown(0);
                     if (P1AcquiredRipple == false) {
                         player1.gainRipple(3);
                     } 
@@ -93,22 +96,25 @@ public class OnGameLoad : MonoBehaviour
             }
         }
         else { // right side
-            if (Input.GetKeyDown("m") & waveInPlay() == true & computerOpponentCheck.computerInPlay == false) {
+            if (Input.GetKeyDown("m") & waveInPlay() == true & computerOpponentCheck.computerInPlay == false & (player2.coolDownActive == false & player2.reflectCooldown <= 0)) {
                 wave.velocity = Vector2.Reflect(wave.velocity, wave.velocity.normalized);
                 if (wave.position.x < 2) {
                     wave.velocity = new Vector2(wave.velocity.x - 1, -wave.velocity.y);
+                    player2.startCooldown(2);
                      if (P2AcquiredRipple == false) {
                         player2.gainRipple(1);
                     }
                 }
                 else if (wave.position.x < 7) {
                     wave.velocity = new Vector2(wave.velocity.x - 2, -wave.velocity.y);
+                    player2.startCooldown(1);
                     if (P2AcquiredRipple == false) {
                         player2.gainRipple(2);
                     }
                 } 
                 else {
                     wave.velocity = new Vector2(wave.velocity.x - 4, -wave.velocity.y);
+                    player2.startCooldown(0);
                     if (P2AcquiredRipple == false) {
                         player2.gainRipple(3);
                     }
