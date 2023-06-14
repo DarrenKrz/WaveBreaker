@@ -10,7 +10,7 @@ public class ComputerOpponent : MonoBehaviour
     public bool computerHitWave;
 
     public void vsComputer() {
-        computerInPlay = true;
+        computerInPlay = false;
         computerHitWave = false;
     }
     public void onComputerSide() {
