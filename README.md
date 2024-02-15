@@ -1,8 +1,9 @@
 WaveBreaker is a one versus one game where players pass a wave back and forth with precise timings. If a player fails to return the wave, they take damage proportional to the velocity of the wave. Win the game by reducing your opponents health to zero.
 ![Screenshot (95)](https://github.com/DarrenKrz/WaveBreaker/assets/123832313/70299b91-b0ec-401b-bf29-225764691df5)
 **Title Screen / Start Menu**
+
 ![Gameplay](https://github.com/DarrenKrz/WaveBreaker/assets/123832313/234f1a9c-7470-4e5b-90cf-a156933dde80)
-**Gameplay**
+**Gameplay**    
 
 **Game Info:**  
 The wave has three forms corresponding to different velocity thresholds, the wave starts at 1 damage, increasing by one for each further form.  
